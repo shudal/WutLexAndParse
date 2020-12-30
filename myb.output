@@ -1,0 +1,531 @@
+Nonterminals useless in grammar
+
+   PlusOpt
+   EXP
+
+
+Terminals unused in grammar
+
+   PILLEGAL
+   PFINISH
+   PSTRCON
+   PVOIDTK
+   PMAINTK
+   PIFTK
+   PELSETK
+   PDOTK
+   PWHILETK
+   PFORTK
+   PSCANFTK
+   PPRINTFTK
+   PRETURNTK
+   PMULT
+   PDIV
+   PLSS
+   PLEQ
+   PGRE
+   PGEQ
+   PEQL
+   PNEQ
+   PRPARENT
+   PLBRACK
+   PRBRACK
+   PLBRACE
+   PRBRACE
+
+
+语法中的规则无效
+
+   23 PlusOpt: %empty
+   24        | PPLUS
+
+   25 EXP: PlusOpt
+
+
+由于冲突，解析器中的规则不起作用
+
+    3 VarSayOpt: VarSay
+
+
+状态 13 conflicts: 2 shift/reduce
+
+
+语法
+
+    0 $accept: Program $end
+
+    1 Program: ConstSayOpt VarSayOpt ProgramFunc
+
+    2 ConstSayOpt: ConstDeclaration
+
+    3 VarSayOpt: VarSay
+
+    4 ProgramFunc: HaveReturnFuncDef
+
+    5 NoSignInt: PINTCON
+
+    6 MyInt: NoSignInt
+    7      | PPLUS NoSignInt
+    8      | PMINU NoSignInt
+
+    9 TypeTag: PINTTK
+   10        | PCHARTK
+
+   11 ValueType: MyInt
+   12          | PCHARCON
+
+   13 ConstDef1: ConstDef1 PCOMMA PIDENFR PASSIGN ValueType
+   14          | PIDENFR PASSIGN ValueType
+
+   15 ConstDef: TypeTag ConstDef1
+
+   16 VarDef: TypeTag PIDENFR PSEMICN
+
+   17 VarSay: VarDef
+   18       | VarSay VarDef
+
+   19 ConstDeclaration: PCONSTTK ConstDef PSEMICN
+   20                 | ConstDeclaration PCONSTTK ConstDef PSEMICN
+
+   21 SayHeader: TypeTag PIDENFR PLPARENT
+
+   22 HaveReturnFuncDef: SayHeader
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+PILLEGAL (258)
+PFINISH (259)
+PIDENFR (260) 13 14 16 21
+PINTCON (261) 5
+PCHARCON (262) 12
+PSTRCON (263)
+PCONSTTK (264) 19 20
+PINTTK (265) 9
+PCHARTK (266) 10
+PVOIDTK (267)
+PMAINTK (268)
+PIFTK (269)
+PELSETK (270)
+PDOTK (271)
+PWHILETK (272)
+PFORTK (273)
+PSCANFTK (274)
+PPRINTFTK (275)
+PRETURNTK (276)
+PPLUS (277) 7
+PMINU (278) 8
+PMULT (279)
+PDIV (280)
+PLSS (281)
+PLEQ (282)
+PGRE (283)
+PGEQ (284)
+PEQL (285)
+PNEQ (286)
+PASSIGN (287) 13 14
+PSEMICN (288) 16 19 20
+PCOMMA (289) 13
+PLPARENT (290) 21
+PRPARENT (291)
+PLBRACK (292)
+PRBRACK (293)
+PLBRACE (294)
+PRBRACE (295)
+
+
+Nonterminals, with rules where they appear
+
+$accept (41)
+    左： 0
+Program (42)
+    左： 1, 右： 0
+ConstSayOpt (43)
+    左： 2, 右： 1
+VarSayOpt (44)
+    左： 3, 右： 1
+ProgramFunc (45)
+    左： 4, 右： 1
+NoSignInt (46)
+    左： 5, 右： 6 7 8
+MyInt (47)
+    左： 6 7 8, 右： 11
+TypeTag (48)
+    左： 9 10, 右： 15 16 21
+ValueType (49)
+    左： 11 12, 右： 13 14
+ConstDef1 (50)
+    左： 13 14, 右： 13 15
+ConstDef (51)
+    左： 15, 右： 19 20
+VarDef (52)
+    左： 16, 右： 17 18
+VarSay (53)
+    左： 17 18, 右： 3 18
+ConstDeclaration (54)
+    左： 19 20, 右： 2 20
+SayHeader (55)
+    左： 21, 右： 22
+HaveReturnFuncDef (56)
+    左： 22, 右： 4
+
+
+State 0
+
+    0 $accept: . Program $end
+
+    PCONSTTK  shift, and go to state 1
+
+    Program           转到状态 2
+    ConstSayOpt       转到状态 3
+    ConstDeclaration  转到状态 4
+
+
+State 1
+
+   19 ConstDeclaration: PCONSTTK . ConstDef PSEMICN
+
+    PINTTK   shift, and go to state 5
+    PCHARTK  shift, and go to state 6
+
+    TypeTag   转到状态 7
+    ConstDef  转到状态 8
+
+
+State 2
+
+    0 $accept: Program . $end
+
+    $end  shift, and go to state 9
+
+
+State 3
+
+    1 Program: ConstSayOpt . VarSayOpt ProgramFunc
+
+    PINTTK   shift, and go to state 5
+    PCHARTK  shift, and go to state 6
+
+    VarSayOpt  转到状态 10
+    TypeTag    转到状态 11
+    VarDef     转到状态 12
+    VarSay     转到状态 13
+
+
+State 4
+
+    2 ConstSayOpt: ConstDeclaration .
+   20 ConstDeclaration: ConstDeclaration . PCONSTTK ConstDef PSEMICN
+
+    PCONSTTK  shift, and go to state 14
+
+    $default  reduce using rule 2 (ConstSayOpt)
+
+
+State 5
+
+    9 TypeTag: PINTTK .
+
+    $default  reduce using rule 9 (TypeTag)
+
+
+State 6
+
+   10 TypeTag: PCHARTK .
+
+    $default  reduce using rule 10 (TypeTag)
+
+
+State 7
+
+   15 ConstDef: TypeTag . ConstDef1
+
+    PIDENFR  shift, and go to state 15
+
+    ConstDef1  转到状态 16
+
+
+State 8
+
+   19 ConstDeclaration: PCONSTTK ConstDef . PSEMICN
+
+    PSEMICN  shift, and go to state 17
+
+
+State 9
+
+    0 $accept: Program $end .
+
+    $default  接受
+
+
+State 10
+
+    1 Program: ConstSayOpt VarSayOpt . ProgramFunc
+
+    PINTTK   shift, and go to state 5
+    PCHARTK  shift, and go to state 6
+
+    ProgramFunc        转到状态 18
+    TypeTag            转到状态 19
+    SayHeader          转到状态 20
+    HaveReturnFuncDef  转到状态 21
+
+
+State 11
+
+   16 VarDef: TypeTag . PIDENFR PSEMICN
+
+    PIDENFR  shift, and go to state 22
+
+
+State 12
+
+   17 VarSay: VarDef .
+
+    $default  reduce using rule 17 (VarSay)
+
+
+State 13
+
+    3 VarSayOpt: VarSay .
+   18 VarSay: VarSay . VarDef
+
+    PINTTK   shift, and go to state 5
+    PCHARTK  shift, and go to state 6
+
+    PINTTK   [reduce using rule 3 (VarSayOpt)]
+    PCHARTK  [reduce using rule 3 (VarSayOpt)]
+
+    TypeTag  转到状态 11
+    VarDef   转到状态 23
+
+
+State 14
+
+   20 ConstDeclaration: ConstDeclaration PCONSTTK . ConstDef PSEMICN
+
+    PINTTK   shift, and go to state 5
+    PCHARTK  shift, and go to state 6
+
+    TypeTag   转到状态 7
+    ConstDef  转到状态 24
+
+
+State 15
+
+   14 ConstDef1: PIDENFR . PASSIGN ValueType
+
+    PASSIGN  shift, and go to state 25
+
+
+State 16
+
+   13 ConstDef1: ConstDef1 . PCOMMA PIDENFR PASSIGN ValueType
+   15 ConstDef: TypeTag ConstDef1 .
+
+    PCOMMA  shift, and go to state 26
+
+    $default  reduce using rule 15 (ConstDef)
+
+
+State 17
+
+   19 ConstDeclaration: PCONSTTK ConstDef PSEMICN .
+
+    $default  reduce using rule 19 (ConstDeclaration)
+
+
+State 18
+
+    1 Program: ConstSayOpt VarSayOpt ProgramFunc .
+
+    $default  reduce using rule 1 (Program)
+
+
+State 19
+
+   21 SayHeader: TypeTag . PIDENFR PLPARENT
+
+    PIDENFR  shift, and go to state 27
+
+
+State 20
+
+   22 HaveReturnFuncDef: SayHeader .
+
+    $default  reduce using rule 22 (HaveReturnFuncDef)
+
+
+State 21
+
+    4 ProgramFunc: HaveReturnFuncDef .
+
+    $default  reduce using rule 4 (ProgramFunc)
+
+
+State 22
+
+   16 VarDef: TypeTag PIDENFR . PSEMICN
+
+    PSEMICN  shift, and go to state 28
+
+
+State 23
+
+   18 VarSay: VarSay VarDef .
+
+    $default  reduce using rule 18 (VarSay)
+
+
+State 24
+
+   20 ConstDeclaration: ConstDeclaration PCONSTTK ConstDef . PSEMICN
+
+    PSEMICN  shift, and go to state 29
+
+
+State 25
+
+   14 ConstDef1: PIDENFR PASSIGN . ValueType
+
+    PINTCON   shift, and go to state 30
+    PCHARCON  shift, and go to state 31
+    PPLUS     shift, and go to state 32
+    PMINU     shift, and go to state 33
+
+    NoSignInt  转到状态 34
+    MyInt      转到状态 35
+    ValueType  转到状态 36
+
+
+State 26
+
+   13 ConstDef1: ConstDef1 PCOMMA . PIDENFR PASSIGN ValueType
+
+    PIDENFR  shift, and go to state 37
+
+
+State 27
+
+   21 SayHeader: TypeTag PIDENFR . PLPARENT
+
+    PLPARENT  shift, and go to state 38
+
+
+State 28
+
+   16 VarDef: TypeTag PIDENFR PSEMICN .
+
+    $default  reduce using rule 16 (VarDef)
+
+
+State 29
+
+   20 ConstDeclaration: ConstDeclaration PCONSTTK ConstDef PSEMICN .
+
+    $default  reduce using rule 20 (ConstDeclaration)
+
+
+State 30
+
+    5 NoSignInt: PINTCON .
+
+    $default  reduce using rule 5 (NoSignInt)
+
+
+State 31
+
+   12 ValueType: PCHARCON .
+
+    $default  reduce using rule 12 (ValueType)
+
+
+State 32
+
+    7 MyInt: PPLUS . NoSignInt
+
+    PINTCON  shift, and go to state 30
+
+    NoSignInt  转到状态 39
+
+
+State 33
+
+    8 MyInt: PMINU . NoSignInt
+
+    PINTCON  shift, and go to state 30
+
+    NoSignInt  转到状态 40
+
+
+State 34
+
+    6 MyInt: NoSignInt .
+
+    $default  reduce using rule 6 (MyInt)
+
+
+State 35
+
+   11 ValueType: MyInt .
+
+    $default  reduce using rule 11 (ValueType)
+
+
+State 36
+
+   14 ConstDef1: PIDENFR PASSIGN ValueType .
+
+    $default  reduce using rule 14 (ConstDef1)
+
+
+State 37
+
+   13 ConstDef1: ConstDef1 PCOMMA PIDENFR . PASSIGN ValueType
+
+    PASSIGN  shift, and go to state 41
+
+
+State 38
+
+   21 SayHeader: TypeTag PIDENFR PLPARENT .
+
+    $default  reduce using rule 21 (SayHeader)
+
+
+State 39
+
+    7 MyInt: PPLUS NoSignInt .
+
+    $default  reduce using rule 7 (MyInt)
+
+
+State 40
+
+    8 MyInt: PMINU NoSignInt .
+
+    $default  reduce using rule 8 (MyInt)
+
+
+State 41
+
+   13 ConstDef1: ConstDef1 PCOMMA PIDENFR PASSIGN . ValueType
+
+    PINTCON   shift, and go to state 30
+    PCHARCON  shift, and go to state 31
+    PPLUS     shift, and go to state 32
+    PMINU     shift, and go to state 33
+
+    NoSignInt  转到状态 34
+    MyInt      转到状态 35
+    ValueType  转到状态 42
+
+
+State 42
+
+   13 ConstDef1: ConstDef1 PCOMMA PIDENFR PASSIGN ValueType .
+
+    $default  reduce using rule 13 (ConstDef1)

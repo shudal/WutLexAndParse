@@ -1,0 +1,118 @@
+CONSTTK const
+syntax error
+INTTK int
+IDENFR const1
+ASSIGN =
+INTCON 1
+COMMA ,
+<无符号整数>
+<整数1>
+IDENFR const2
+ASSIGN =
+MINU -
+INTCON 100
+SEMICN ;
+<无符号整数>
+<整数2>
+CONSTTK const
+<常量定义1>
+CHARTK char
+IDENFR const3
+ASSIGN =
+CHARCON _
+SEMICN ;
+INTTK int
+<常量定义1>
+<常量说明2>
+IDENFR change1
+SEMICN ;
+CHARTK char
+<变量定义>
+IDENFR change3
+SEMICN ;
+INTTK int
+<变量定义>
+<变量说明>
+IDENFR gets1
+LPARENT (
+<声明头部>
+INTTK int
+IDENFR var1
+COMMA ,
+INTTK int
+IDENFR var2
+RPARENT )
+LBRACE {
+<参数表>
+IDENFR change1
+ASSIGN =
+IDENFR var1
+PLUS +
+IDENFR var2
+<因子1>
+<项>
+SEMICN ;
+RETURNTK return
+<因子1>
+<项>
+<表达式2>
+<赋值语句>
+<语句2>
+LPARENT (
+IDENFR change1
+RPARENT )
+SEMICN ;
+<因子1>
+<项>
+<表达式1>
+RBRACE }
+<<返回语句>>
+<语句1>
+<语句列>
+VOIDTK void
+<复合语句>
+<有返回值函数定义>
+MAINTK main
+LPARENT (
+RPARENT )
+LBRACE {
+PRINTFTK printf
+LPARENT (
+STRCON Hello World
+RPARENT )
+<字符串>
+SEMICN ;
+PRINTFTK printf
+<写语句>
+<语句-print>
+LPARENT (
+IDENFR gets1
+LPARENT (
+INTCON 10
+COMMA ,
+<无符号整数>
+<整数1>
+<因子3>
+<项>
+INTCON 20
+<表达式1>
+RPARENT )
+<无符号整数>
+<整数1>
+<因子3>
+<项>
+RPARENT )
+<表达式1>
+<值参数表>
+<有返回值函数调用语句>
+<因子2>
+<项>
+SEMICN ;
+<表达式1>
+RBRACE }
+<写语句>
+<语句-print>
+<语句列>
+<复合语句>
+<主函数>
+<程序>
